@@ -10,7 +10,7 @@
 <cfset addDatato = #queryAddRow(kuiri, [ "surat", "2021-01-02", 10] )# >
 
 <cfoutput>
-<cfloop query="kuiri" group="id">
+<cfloop query="kuiri" group="id"> <!---group by id--->
 <cfset b=0>
 		<br />
 		#kuiri.id#:
