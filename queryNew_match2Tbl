@@ -1,0 +1,35 @@
+<cfset kuiri = queryNew("id,datet,data") />
+<cfset addDatato = #queryAddRow(kuiri, [ "vaksin", "2021-06-01", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "vaksin", "2021-06-11", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "vaksin", "2021-05-01", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "vaksin", "2021-06-05", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "vaksin", "2021-05-31", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "memo", "2021-06-17", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "memo", "2021-05-01", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "surat", "2021-05-11", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "surat", "2021-05-02", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "vaksin", "2021-06-21", 10] )# >
+<cfset addDatato = #queryAddRow(kuiri, [ "vaksin", "2021-06-01", 10] )# >
+<cfoutput>
+
+<cfset tarikh = queryNew("tkh") />
+<cfloop index="i" from="1" to="31">
+    <cfset dateTkh= #dateadd('d',now(),i)#>
+    <cfset tambahData = #queryAddRow(tarikh, [dateTkh])# >
+</cfloop>
+    
+<cfquery name="kui" dbtype="query">
+  SELECT *
+    FROM kuiri
+    WHERE kuiri.datet  in (#ValueList(tarikh.tkh)#)
+</cfquery>
+    
+<cfloop query="kui">
+    #datet#<br>
+</cfloop>    
+#kui.recordcount#   
+ 
+</cfoutput>
+	
+<cfdump var=#kuiri#>
+<cfdump var=#tarikh#>
